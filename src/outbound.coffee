@@ -27,17 +27,24 @@ response = (vars, req, res) ->
     doc = mimecontent(res.body, 'text/xml')
     event = doc.toObject(explicitArray: false, explicitRoot: false, mergeAttrs: true)
     event['outcome'] = event.result
+    event['lead'] = { id: event.leadId, url: event.url }
     delete event.result
+    delete event.leadId
+    delete event.url
     event
   else
     { outcome: 'error', reason: "LeadConduit Classic error (#{res.status})" }
 
 response.variables = ->
   [
-    { name: 'outcome', type: 'string', description: 'lead-processing result' },
+    { name: 'outcome', type: 'string', description: 'lead-processing result' }
     { name: 'reason', type: 'string', description: 'in case of failure, the reason for failure' }
-    { name: 'leadId', type: 'string', description: 'ID of the lead in LeadConduit Classic' },
-    { name: 'url', type: 'string', description: 'URL of the lead in LeadConduit Classic' },
+    { lead:
+      [
+        { name: 'id', type: 'string', description: 'ID of the lead in LeadConduit Classic' }
+        { name: 'url', type: 'string', description: 'URL of the lead in LeadConduit Classic' }
+      ]
+    }
   ]
 
 #
