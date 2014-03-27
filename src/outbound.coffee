@@ -6,14 +6,10 @@ baseUrl = 'https://app.leadconduit.com/v2/PostLeadAction'
 #
 
 request = (vars) ->
-  {
   url: "#{baseUrl}?xxAccountId=#{vars.xxAccountId}&xxCampaignId=#{vars.xxCampaignId}",
   method: 'POST',
   headers:
-    {
     Accepts: 'application/xml'
-    }
-  }
 
 request.variables = ->
   [
@@ -31,16 +27,17 @@ response = (vars, req, res) ->
     doc = mimecontent(res.body, 'text/xml')
     event = doc.toObject(explicitArray: false, explicitRoot: false, mergeAttrs: true)
     event['outcome'] = event.result
+    delete event.result
     event
   else
     { outcome: 'error', reason: "LeadConduit Classic error (#{res.status})" }
 
 response.variables = ->
   [
-    { name: 'result', type: 'string', description: 'lead-processing result' },
+    { name: 'outcome', type: 'string', description: 'lead-processing result' },
+    { name: 'reason', type: 'string', description: 'in case of failure, the reason for failure' }
     { name: 'leadId', type: 'string', description: 'ID of the lead in LeadConduit Classic' },
     { name: 'url', type: 'string', description: 'URL of the lead in LeadConduit Classic' },
-    { name: 'reason', type: 'string', description: 'in case of failure, the reason for failure' }
   ]
 
 #
@@ -48,7 +45,6 @@ response.variables = ->
 #
 
 module.exports =
-  type: 'outbound',
   request: request,
   response: response
 

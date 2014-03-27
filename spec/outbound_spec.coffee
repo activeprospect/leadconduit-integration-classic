@@ -37,7 +37,6 @@ describe 'Lead Post Response', ->
     expected =
       outcome: 'success'
       leadId: '0552p8csp'
-      result: 'success'
       url: "http://app.leadconduit.com/leads?id=0552p8csp"
     response = integration.response(vars, req, res)
     assert.deepEqual expected, response
@@ -60,7 +59,6 @@ describe 'Lead Post Response', ->
     expected =
       outcome: 'failure'
       leadId: '0552p8csp'
-      result: "failure"
       reason: 'missing email'
       url: "http://app.leadconduit.com/leads?id=0552p8csp"
     response = integration.response(vars, req, res)
