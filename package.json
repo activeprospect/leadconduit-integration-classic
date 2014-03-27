@@ -1,0 +1,30 @@
+{
+  "name": "leadconduit-lcc",
+  "description": "LeadConduit integration with LeadConduit Classic",
+  "author": "Chris Grayson <chris@activeprospect.com>",
+  "version": "0.0.1",
+  "main": "index.js",
+  "licenses": [{
+    "type": "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International",
+    "url": "http://creativecommons.org/licenses/by-nc-nd/4.0/legalcode"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/activeprospect/node-leadconduit-lcc.git"
+  },
+  "engines": {
+    "node": ">=0.8.1"
+  },
+  "scripts": {
+    "test": "cake test",
+    "prepublish": "cake build"
+  },
+  "dependencies": {
+    "mime-content": ">=0.0.6"
+  },
+  "devDependencies": {
+    "coffee-script": ">= 1.7.0",
+    "mocha": ">= 1.17.0",
+    "chai": ">= 1.9.0"
+  }
+}
