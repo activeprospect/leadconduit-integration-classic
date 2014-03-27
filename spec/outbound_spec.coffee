@@ -2,21 +2,42 @@ assert = require('chai').assert
 mimecontent = require('mime-content')
 integration = require('../src/outbound')
 
+variables = ->
+  xxAccountId: '00abc'
+  xxCampaignId: '00xyz'
+  lead:
+    first_name: 'Walter'
+    last_name: 'White'
+    email:
+      raw: 'WW@A1A.COM'
+      normal: 'ww@a1a.com'
+      domain: 'a1a.com'
+      host: 'a1a'
+      tld: 'com'
+    phone_1:
+      raw: '512-789-1111'
+      normal: '5127891111'
+      area: '512'
+      exchange: '789'
+      line: '1111'
+
 describe 'LeadConduit Classic Request', ->
   request = null
 
   beforeEach ->
-    request = integration.request(xxAccountId: '00abc', xxCampaignId: '00xyz')
+    request = integration.request(variables())
 
   it 'should have url', ->
-    assert.equal 'https://app.leadconduit.com/v2/PostLeadAction?xxAccountId=00abc&xxCampaignId=00xyz', request.url
+    assert.equal request.url, 'https://app.leadconduit.com/v2/PostLeadAction?xxAccountId=00abc&xxCampaignId=00xyz'
 
   it 'should be post', ->
-    assert.equal 'POST', request.method
+    assert.equal request.method, 'POST'
 
   it 'should accept XML', ->
-    assert.equal 'application/xml', request.headers.Accepts
+    assert.equal request.headers.Accept, 'application/xml'
 
+  it 'should send the lead parameters it gets', ->
+    assert.equal request.body, 'first_name=Walter&last_name=White&email=ww%40a1a.com&phone_1=5127891111'
 
 describe 'Lead Post Response', ->
 

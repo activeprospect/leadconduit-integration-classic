@@ -1,4 +1,5 @@
 mimecontent = require('mime-content')
+querystring = require('querystring')
 baseUrl = 'https://app.leadconduit.com/v2/PostLeadAction'
 
 #
@@ -6,10 +7,24 @@ baseUrl = 'https://app.leadconduit.com/v2/PostLeadAction'
 #
 
 request = (vars) ->
-  url: "#{baseUrl}?xxAccountId=#{vars.xxAccountId}&xxCampaignId=#{vars.xxCampaignId}",
-  method: 'POST',
+
+  # build lead data
+  content = {}
+  for key, value of vars.lead
+    if value.normal or value.raw
+      content[key] = value.normal or value.raw
+    else
+      content[key] = value
+
+  # URL encoded post body
+  content = querystring.encode(content)
+
+  url: "#{baseUrl}?xxAccountId=#{vars.xxAccountId}&xxCampaignId=#{vars.xxCampaignId}"
+  method: 'POST'
   headers:
-    Accepts: 'application/xml'
+    Accept: 'application/xml'
+  body: content
+
 
 request.variables = ->
   [
