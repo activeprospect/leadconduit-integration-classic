@@ -23,6 +23,8 @@ request = (vars) ->
   method: 'POST'
   headers:
     Accept: 'application/xml'
+    'Content-Type': 'application/x-www-form-urlencoded'
+
   body: content
 
 

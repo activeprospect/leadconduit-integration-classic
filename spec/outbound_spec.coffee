@@ -36,6 +36,9 @@ describe 'LeadConduit Classic Request', ->
   it 'should accept XML', ->
     assert.equal request.headers.Accept, 'application/xml'
 
+  it 'should have the right content-type', ->
+    assert.equal request.headers['Content-Type'], 'application/x-www-form-urlencoded'
+
   it 'should send the lead parameters it gets', ->
     assert.equal request.body, 'first_name=Walter&last_name=White&email=ww%40a1a.com&phone_1=5127891111'
 
