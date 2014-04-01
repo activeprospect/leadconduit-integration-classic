@@ -11,10 +11,7 @@ request = (vars) ->
   # build lead data
   content = {}
   for key, value of vars.lead
-    if value.normal or value.raw
-      content[key] = value.normal or value.raw
-    else
-      content[key] = value
+    content[key] = value?.normal or value?.raw or value
 
   # URL encoded post body
   content = querystring.encode(content)

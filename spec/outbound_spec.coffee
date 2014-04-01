@@ -42,6 +42,12 @@ describe 'LeadConduit Classic Request', ->
   it 'should send the lead parameters it gets', ->
     assert.equal request.body, 'first_name=Walter&last_name=White&email=ww%40a1a.com&phone_1=5127891111'
 
+  it 'should allow null attributes without error', ->
+    vars = variables()
+    vars['lead']['nullfield'] = null
+    request = integration.request(vars)
+    assert.equal request.body, 'first_name=Walter&last_name=White&email=ww%40a1a.com&phone_1=5127891111&nullfield='
+
 describe 'Lead Post Response', ->
 
   it 'should parse success response', ->

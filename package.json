@@ -2,7 +2,7 @@
   "name": "leadconduit-classic",
   "description": "LeadConduit integration with LeadConduit Classic",
   "author": "Chris Grayson <chris@activeprospect.com>",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "licenses": [{
     "type": "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International",
