@@ -28,7 +28,7 @@ describe 'LeadConduit Classic Request', ->
     request = integration.request(variables())
 
   it 'should have url', ->
-    assert.equal request.url, 'https://app.leadconduit.com/v2/PostLeadAction?xxAccountId=00abc&xxCampaignId=00xyz'
+    assert.equal request.url, 'https://app.leadconduit.com/v2/PostLeadAction'
 
   it 'should be post', ->
     assert.equal request.method, 'POST'
@@ -39,14 +39,29 @@ describe 'LeadConduit Classic Request', ->
   it 'should have the right content-type', ->
     assert.equal request.headers['Content-Type'], 'application/x-www-form-urlencoded'
 
-  it 'should send the lead parameters it gets', ->
-    assert.equal request.body, 'first_name=Walter&last_name=White&email=ww%40a1a.com&phone_1=5127891111'
+  it 'body should include xxAccountId', ->
+    assert.include request.body, 'xxAccountId=00abc'
+
+  it 'body should include xxCampaignId', ->
+    assert.include request.body, 'xxCampaignId=00xyz'
+
+  it 'body should not include xxSiteId when not given', ->
+    assert.notInclude request.body, 'xxSiteId'
+
+  it 'body should include xxSiteId when given', ->
+    vars = variables()
+    vars['xxSiteId'] = '00lmn'
+    request = integration.request(vars)
+    assert.include request.body, 'xxSiteId=00lmn'
+
+  it 'body should include all lead parameters', ->
+    assert.include request.body, 'first_name=Walter&last_name=White&email=ww%40a1a.com&phone_1=5127891111'
 
   it 'should allow null attributes without error', ->
     vars = variables()
     vars['lead']['nullfield'] = null
     request = integration.request(vars)
-    assert.equal request.body, 'first_name=Walter&last_name=White&email=ww%40a1a.com&phone_1=5127891111&nullfield='
+    assert.include request.body, 'nullfield='
 
 describe 'Lead Post Response', ->
 

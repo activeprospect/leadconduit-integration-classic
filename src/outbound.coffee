@@ -8,15 +8,21 @@ baseUrl = 'https://app.leadconduit.com/v2/PostLeadAction'
 
 request = (vars) ->
 
+  # LCC routing parameters
+  content = {
+    xxAccountId:  vars.xxAccountId
+    xxCampaignId: vars.xxCampaignId
+  }
+  content['xxSiteId'] = vars.xxSiteId if vars.xxSiteId?
+
   # build lead data
-  content = {}
   for key, value of vars.lead
     content[key] = value?.normal or value?.raw or value
 
   # URL encoded post body
   content = querystring.encode(content)
 
-  url: "#{baseUrl}?xxAccountId=#{vars.xxAccountId}&xxCampaignId=#{vars.xxCampaignId}"
+  url: baseUrl
   method: 'POST'
   headers:
     Accept: 'application/xml'
@@ -27,8 +33,9 @@ request = (vars) ->
 
 request.variables = ->
   [
-    { name: 'xxAccountId', type: 'string', required: true, description: 'LeadConduit Classic account ID' },
-    { name: 'xxCampaignId', type: 'string', required: true, description: 'LeadConduit Classic campaign ID' }
+    { name: 'xxAccountId',  type: 'string', required: true,  description: 'LeadConduit Classic account ID' },
+    { name: 'xxCampaignId', type: 'string', required: true,  description: 'LeadConduit Classic campaign ID' }
+    { name: 'xxSiteId',     type: 'string', required: false, description: 'LeadConduit Classic site ID' }
   ]
 
 
