@@ -10,7 +10,7 @@
   }],
   "repository": {
     "type": "git",
-    "url": "https://github.com/activeprospect/node-leadconduit-classic.git"
+    "url": "https://github.com/activeprospect/leadconduit-integration-classic.git"
   },
   "engines": {
     "node": ">=0.8.1"
