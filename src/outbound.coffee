@@ -52,16 +52,16 @@ response = (vars, req, res) ->
     delete event.result
     delete event.leadId
     delete event.url
-    event
+    { classic: event }
   else
-    { outcome: 'error', reason: "LeadConduit Classic error (#{res.status})" }
+    { classic: { outcome: 'error', reason: "LeadConduit Classic error (#{res.status})" } }
 
 response.variables = ->
   [
-    { name: 'outcome', type: 'string', description: 'lead-processing result' }
-    { name: 'reason', type: 'string', description: 'in case of failure, the reason for failure' }
-    { name: 'lead.id', type: 'string', description: 'ID of the lead in LeadConduit Classic' }
-    { name: 'lead.url', type: 'string', description: 'URL of the lead in LeadConduit Classic' }
+    { name: 'classic.outcome', type: 'string', description: 'lead-processing result' }
+    { name: 'classic.reason', type: 'string', description: 'in case of failure, the reason for failure' }
+    { name: 'classic.lead.id', type: 'string', description: 'ID of the lead in LeadConduit Classic' }
+    { name: 'classic.lead.url', type: 'string', description: 'URL of the lead in LeadConduit Classic' }
   ]
 
 #
