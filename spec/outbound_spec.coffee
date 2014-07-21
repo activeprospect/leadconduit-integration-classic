@@ -80,11 +80,10 @@ describe 'Lead Post Response', ->
             </response>
             """
     expected =
-      classic:
-        outcome: 'success'
-        lead:
-          id: '0552p8csp'
-          url: 'http://app.leadconduit.com/leads?id=0552p8csp'
+      outcome: 'success'
+      lead:
+        id: '0552p8csp'
+        url: 'http://app.leadconduit.com/leads?id=0552p8csp'
 
     response = integration.response(vars, req, res)
     assert.deepEqual response, expected
@@ -105,12 +104,11 @@ describe 'Lead Post Response', ->
             </response>
             """
     expected =
-      classic:
-        outcome: 'failure'
-        reason: 'missing email'
-        lead:
-          id: '0552p8csp'
-          url: 'http://app.leadconduit.com/leads?id=0552p8csp'
+      outcome: 'failure'
+      reason: 'missing email'
+      lead:
+        id: '0552p8csp'
+        url: 'http://app.leadconduit.com/leads?id=0552p8csp'
 
     response = integration.response(vars, req, res)
     assert.deepEqual response, expected
@@ -124,8 +122,7 @@ describe 'Lead Post Response', ->
         'Content-Type': 'application/xml'
       body: ''
     expected =
-      classic:
-        outcome: 'error'
-        reason: 'LeadConduit Classic error (400)'
+      outcome: 'error'
+      reason: 'LeadConduit Classic error (400)'
     response = integration.response(vars, req, res)
     assert.deepEqual response, expected
