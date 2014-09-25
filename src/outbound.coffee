@@ -17,7 +17,7 @@ request = (vars) ->
 
   # build lead data
   for key, value of vars.lead
-    content[key] = value?.normal or value?.raw or value
+    content[key] = value?.toString()
 
   # URL encoded post body
   content = querystring.encode(content)

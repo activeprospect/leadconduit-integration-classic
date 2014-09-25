@@ -1,25 +1,16 @@
 assert = require('chai').assert
 mimecontent = require('mime-content')
+fields = require('leadconduit-fields')
 integration = require('../src/outbound')
 
 variables = ->
   xxAccountId: '00abc'
   xxCampaignId: '00xyz'
-  lead:
+  lead: fields.buildLeadVars
     first_name: 'Walter'
     last_name: 'White'
-    email:
-      raw: 'WW@A1A.COM'
-      normal: 'ww@a1a.com'
-      domain: 'a1a.com'
-      host: 'a1a'
-      tld: 'com'
-    phone_1:
-      raw: '512-789-1111'
-      normal: '5127891111'
-      area: '512'
-      exchange: '789'
-      line: '1111'
+    email: 'WW@A1A.COM'
+    phone_1: '512-789-1111'
 
 describe 'LeadConduit Classic Request', ->
   request = null
