@@ -1,5 +1,6 @@
 mimecontent = require('mime-content')
 querystring = require('querystring')
+flat = require('flat')
 baseUrl = 'https://app.leadconduit.com/v2/PostLeadAction'
 
 #
@@ -16,8 +17,8 @@ request = (vars) ->
   content['xxSiteId'] = vars.xxSiteId if vars.xxSiteId?
 
   # build lead data
-  for key, value of vars.lead
-    content[key] = value?.toString()
+  for key, value of flat.flatten(vars.lead)
+    content[key] = value?.valueOf()
 
   # URL encoded post body
   content = querystring.encode(content)

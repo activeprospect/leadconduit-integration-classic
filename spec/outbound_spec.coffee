@@ -11,6 +11,9 @@ variables = ->
     last_name: 'White'
     email: 'WW@A1A.COM'
     phone_1: '512-789-1111'
+    mortgage:
+      property:
+        city: 'Austin'
 
 describe 'LeadConduit Classic Request', ->
   request = null
@@ -47,6 +50,9 @@ describe 'LeadConduit Classic Request', ->
 
   it 'body should include all lead parameters', ->
     assert.include request.body, 'first_name=Walter&last_name=White&email=ww%40a1a.com&phone_1=5127891111'
+
+  it 'body should include nested object parameters', ->
+    assert.include request.body, 'mortgage.property.city=Austin'
 
   it 'should allow null attributes without error', ->
     vars = variables()
