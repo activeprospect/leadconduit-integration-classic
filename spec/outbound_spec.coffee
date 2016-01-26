@@ -14,6 +14,9 @@ variables = ->
     mortgage:
       property:
         city: 'Austin'
+  classic:
+    custom:
+      favorite_color: 'yellow'
 
 describe 'LeadConduit Classic Request', ->
   request = null
@@ -53,6 +56,9 @@ describe 'LeadConduit Classic Request', ->
 
   it 'body should include nested object parameters', ->
     assert.include request.body, 'mortgage.property.city=Austin'
+
+  it 'body should include custom fields', ->
+    assert.include request.body, 'favorite_color=yellow'
 
   it 'should allow null attributes without error', ->
     vars = variables()
