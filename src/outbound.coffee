@@ -20,6 +20,10 @@ request = (vars) ->
   for key, value of flat.flatten(vars.lead)
     content[key] = value?.valueOf()
 
+  if vars.classic?.custom
+    for key, value of flat.flatten(vars.classic.custom, safe: true)
+      content[key] = value?.valueOf() if value? and !content[key]?
+
   # URL encoded post body
   content = querystring.encode(content)
 
@@ -37,6 +41,7 @@ request.variables = ->
     { name: 'xxAccountId',  type: 'string', required: true,  description: 'LeadConduit Classic account ID' },
     { name: 'xxCampaignId', type: 'string', required: true,  description: 'LeadConduit Classic campaign ID' }
     { name: 'xxSiteId',     type: 'string', required: false, description: 'LeadConduit Classic site ID' }
+    { name: 'classic.custom.*', type: 'wildcard', required: false }
   ]
 
 
