@@ -17,6 +17,7 @@ variables = ->
   classic:
     custom:
       favorite_color: 'yellow'
+      last_name: 'Black'
 
 describe 'LeadConduit Classic Request', ->
   request = null
@@ -52,13 +53,16 @@ describe 'LeadConduit Classic Request', ->
     assert.include request.body, 'xxSiteId=00lmn'
 
   it 'body should include all lead parameters', ->
-    assert.include request.body, 'first_name=Walter&last_name=White&email=ww%40a1a.com&phone_1=5127891111'
+    assert.include request.body, 'first_name=Walter&last_name=Black&email=ww%40a1a.com&phone_1=5127891111'
 
   it 'body should include nested object parameters', ->
     assert.include request.body, 'mortgage.property.city=Austin'
 
   it 'body should include custom fields', ->
     assert.include request.body, 'favorite_color=yellow'
+
+  it 'custom fields should overwrite default fields', ->
+    assert.include request.body, 'last_name=Black'
 
   it 'should allow null attributes without error', ->
     vars = variables()
