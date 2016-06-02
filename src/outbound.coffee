@@ -22,7 +22,7 @@ request = (vars) ->
 
   if vars.classic?.custom
     for key, value of flat.flatten(vars.classic.custom, safe: true)
-      content[key] = value?.valueOf() if value? and !content[key]?
+      content[key] = value?.valueOf() if value?
 
   # URL encoded post body
   content = querystring.encode(content)
