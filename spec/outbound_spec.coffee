@@ -1,23 +1,24 @@
 assert = require('chai').assert
 mimecontent = require('mime-content')
-fields = require('leadconduit-fields')
 integration = require('../src/outbound')
+parser = require('leadconduit-integration').test.types.parser(integration.request.variables())
 
 variables = ->
-  xxAccountId: '00abc'
-  xxCampaignId: '00xyz'
-  lead: fields.buildLeadVars
-    first_name: 'Walter'
-    last_name: 'White'
-    email: 'WW@A1A.COM'
-    phone_1: '512-789-1111'
-    mortgage:
-      property:
-        city: 'Austin'
-  classic:
-    custom:
-      favorite_color: 'yellow'
-      last_name: 'Black'
+  parser
+    xxAccountId: '00abc'
+    xxCampaignId: '00xyz'
+    lead:
+      first_name: 'Walter'
+      last_name: 'White'
+      email: 'ww@a1a.com'
+      phone_1: '5127891111'
+      mortgage:
+        property:
+          city: 'Austin'
+    classic:
+      custom:
+        favorite_color: 'yellow'
+        last_name: 'Black'
 
 describe 'LeadConduit Classic Request', ->
   request = null
