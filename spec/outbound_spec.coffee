@@ -121,6 +121,33 @@ describe 'Lead Post Response', ->
     response = integration.response(vars, req, res)
     assert.deepEqual response, expected
 
+  it 'should sort multiple response reasons', ->
+
+    vars = {}
+    req = {}
+    res =
+      status: 200,
+      headers:
+        'Content-Type': 'application/xml'
+      body: """
+            <response>
+              <result>failure</result>
+              <reason>missing phone number</reason>
+              <reason>missing email</reason>
+              <leadId>0552p8csp</leadId>
+              <url><![CDATA[http://app.leadconduit.com/leads?id=0552p8csp]]></url>
+            </response>
+            """
+    expected =
+      outcome: 'failure'
+      reason: 'missing email,missing phone number'
+      lead:
+        id: '0552p8csp'
+        url: 'http://app.leadconduit.com/leads?id=0552p8csp'
+
+    response = integration.response(vars, req, res)
+    assert.deepEqual response, expected
+
   it 'should return error outcome on non-200 response status', ->
     vars = {}
     req = {}

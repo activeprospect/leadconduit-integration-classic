@@ -17,8 +17,8 @@
     "prepublish": "cake build"
   },
   "dependencies": {
-    "mime-content": ">=0.0.6",
-    "flat": "^1.3.0"
+    "flat": "^1.3.0",
+    "mime-content": ">=0.0.6"
   },
   "devDependencies": {
     "leadconduit-integration": "^0.2.0",

@@ -55,6 +55,7 @@ response = (vars, req, res) ->
     event = doc.toObject(explicitArray: false, explicitRoot: false, mergeAttrs: true)
     event['outcome'] = event.result
     event['lead'] = { id: event.leadId, url: event.url }
+    event.reason = event.reason.sort().toString() if Array.isArray(event.reason)
     delete event.result
     delete event.leadId
     delete event.url
