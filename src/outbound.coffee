@@ -1,7 +1,7 @@
 mimecontent = require('mime-content')
 querystring = require('querystring')
 flat = require('flat')
-baseUrl = 'https://app.leadconduit.com/v2/PostLeadAction'
+baseUrl = 'https://classic.leadconduit.com/v2/PostLeadAction'
 
 #
 # Request Function -------------------------------------------------------
