@@ -1,7 +1,7 @@
 mimecontent = require('mime-content')
 querystring = require('querystring')
 flat = require('flat')
-baseUrl = 'https://app.leadconduit.com/v2/PostLeadAction'
+baseUrl = 'https://classic.leadconduit.com/v2/PostLeadAction'
 
 #
 # Request Function -------------------------------------------------------
@@ -55,6 +55,7 @@ response = (vars, req, res) ->
     event = doc.toObject(explicitArray: false, explicitRoot: false, mergeAttrs: true)
     event['outcome'] = event.result
     event['lead'] = { id: event.leadId, url: event.url }
+    event.reason = event.reason.sort().toString() if Array.isArray(event.reason)
     delete event.result
     delete event.leadId
     delete event.url

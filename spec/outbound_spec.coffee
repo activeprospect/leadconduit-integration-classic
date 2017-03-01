@@ -27,7 +27,7 @@ describe 'LeadConduit Classic Request', ->
     request = integration.request(variables())
 
   it 'should have url', ->
-    assert.equal request.url, 'https://app.leadconduit.com/v2/PostLeadAction'
+    assert.equal request.url, 'https://classic.leadconduit.com/v2/PostLeadAction'
 
   it 'should be post', ->
     assert.equal request.method, 'POST'
@@ -84,14 +84,14 @@ describe 'Lead Post Response', ->
             <response>
               <result>success</result>
               <leadId>0552p8csp</leadId>
-              <url><![CDATA[http://app.leadconduit.com/leads?id=0552p8csp]]></url>
+              <url><![CDATA[http://classic.leadconduit.com/leads?id=0552p8csp]]></url>
             </response>
             """
     expected =
       outcome: 'success'
       lead:
         id: '0552p8csp'
-        url: 'http://app.leadconduit.com/leads?id=0552p8csp'
+        url: 'http://classic.leadconduit.com/leads?id=0552p8csp'
 
     response = integration.response(vars, req, res)
     assert.deepEqual response, expected
@@ -108,7 +108,7 @@ describe 'Lead Post Response', ->
               <result>failure</result>
               <reason>missing email</reason>
               <leadId>0552p8csp</leadId>
-              <url><![CDATA[http://app.leadconduit.com/leads?id=0552p8csp]]></url>
+              <url><![CDATA[http://classic.leadconduit.com/leads?id=0552p8csp]]></url>
             </response>
             """
     expected =
@@ -116,7 +116,34 @@ describe 'Lead Post Response', ->
       reason: 'missing email'
       lead:
         id: '0552p8csp'
-        url: 'http://app.leadconduit.com/leads?id=0552p8csp'
+        url: 'http://classic.leadconduit.com/leads?id=0552p8csp'
+
+    response = integration.response(vars, req, res)
+    assert.deepEqual response, expected
+
+  it 'should sort multiple response reasons', ->
+
+    vars = {}
+    req = {}
+    res =
+      status: 200,
+      headers:
+        'Content-Type': 'application/xml'
+      body: """
+            <response>
+              <result>failure</result>
+              <reason>missing phone number</reason>
+              <reason>missing email</reason>
+              <leadId>0552p8csp</leadId>
+              <url><![CDATA[http://classic.leadconduit.com/leads?id=0552p8csp]]></url>
+            </response>
+            """
+    expected =
+      outcome: 'failure'
+      reason: 'missing email,missing phone number'
+      lead:
+        id: '0552p8csp'
+        url: 'http://classic.leadconduit.com/leads?id=0552p8csp'
 
     response = integration.response(vars, req, res)
     assert.deepEqual response, expected
