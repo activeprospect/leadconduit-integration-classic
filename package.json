@@ -9,21 +9,16 @@
     "type": "git",
     "url": "https://github.com/activeprospect/leadconduit-integration-classic.git"
   },
-  "engines": {
-    "node": ">=0.10"
-  },
   "scripts": {
-    "test": "cake test",
-    "prepublish": "cake build"
+    "test": "mocha"
   },
   "dependencies": {
     "flat": "^1.3.0",
-    "mime-content": ">=0.0.6"
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
+    "chai": ">= 1.9.0",
     "leadconduit-integration": "^0.2.0",
-    "coffee-script": ">= 1.7.0",
-    "mocha": ">= 1.17.0",
-    "chai": ">= 1.9.0"
+    "mocha": "^5.0.0"
   }
 }
