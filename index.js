@@ -1,3 +1,4 @@
 module.exports = {
-  outbound: require('./lib/outbound')
+  outbound: require('./lib/outbound'),
+  inbound: require('./lib/inbound')
 };
