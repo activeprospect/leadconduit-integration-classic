@@ -2,8 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.1.5] - 2018-02-01
+## [0.2.0] - 2018-02-01
 ### Added
+- Add inbound integration
 - Convert to JS
 
 ## [0.1.5] - 2017-03-01
