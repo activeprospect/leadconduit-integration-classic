@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.7] - 2021-02-25
+### Fixed
+- fix npm vulnerabilities
+
 ## [0.2.5] - 2018-03-03
 ### Added
 - add metadata and icon
