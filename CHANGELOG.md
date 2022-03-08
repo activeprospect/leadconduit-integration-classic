@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.8] - 2022-03-07
+### Fixed
+- update to use integration-dev-dependencies; deprecated ([sc-33585](https://app.shortcut.com/active-prospect/story/33585/remove-the-leadconduit-classic-integration))
+
 ## [0.2.7] - 2021-02-25
 ### Fixed
 - fix npm vulnerabilities
